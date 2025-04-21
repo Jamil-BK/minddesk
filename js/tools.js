@@ -6,7 +6,7 @@
 const weatherContainer = document.getElementById("weather-content");
 
 // ✅ API Key
-const weatherApiKey = "2acb7aaa608320a266ab9e93eac51581";
+const weatherApiKey = OPENWEATHER_API_KEY;
 const defaultCity = "Toronto";
 
 function fetchWeather(city) {
@@ -76,27 +76,47 @@ document.getElementById("currency-form").addEventListener("submit", function (e)
 
 
 // Stocks Placeholder
-// Stock Tracker using Twelve Data's demo key
-document.getElementById("stock-form").addEventListener("submit", function () {
-    const symbol = document.getElementById("stock-symbol").value.toUpperCase();
-    const resultDiv = document.getElementById("stock-result");
-  
-    resultDiv.innerText = "Fetching stock price...";
-  
-    const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`;
-  
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        if (data.price) {
-          resultDiv.innerHTML = `💹 <strong>${symbol}</strong>: $${data.price}`;
-        } else {
-          resultDiv.innerHTML = `❌ Stock symbol not found or limit reached.`;
-        }
-      })
-      .catch(err => {
-        resultDiv.innerHTML = "❌ Error fetching stock data.";
-        console.error(err);
-      });
-  });
-  
+// 📈 Finnhub Smart Stock Tracker
+const stockForm = document.getElementById("stock-form");
+const stockSymbolInput = document.getElementById("stock-symbol");
+const stockResult = document.getElementById("stock-result");
+const finnhubApiKey = "5858cc257e294c908053c1f..."; // Replace with full key
+
+stockForm.addEventListener("submit", async () => {
+  const query = stockSymbolInput.value.trim();
+  if (!query) return;
+
+  stockResult.innerHTML = "🔍 Searching...";
+
+  try {
+    const searchUrl = `https://finnhub.io/api/v1/search?q=${query}&token=${finnhubApiKey}`;
+    const searchRes = await fetch(searchUrl);
+    const searchData = await searchRes.json();
+
+    if (!searchData.result || searchData.result.length === 0) {
+      stockResult.innerHTML = "❌ No matching stock found.";
+      return;
+    }
+
+    // 🧠 Try to match input with name or symbol
+    const match = searchData.result.find(item =>
+      item.symbol.toLowerCase() === query.toLowerCase() ||
+      item.description.toLowerCase().includes(query.toLowerCase())
+    );
+
+    const selectedSymbol = match ? match.symbol : searchData.result[0].symbol;
+
+    const quoteUrl = `https://finnhub.io/api/v1/quote?symbol=${selectedSymbol}&token=${finnhubApiKey}`;
+    const quoteRes = await fetch(quoteUrl);
+    const quoteData = await quoteRes.json();
+
+    if (quoteData.c) {
+      stockResult.innerHTML = `💹 <strong>${selectedSymbol}</strong>: $${quoteData.c.toFixed(2)} (Live)`;
+    } else {
+      stockResult.innerHTML = "⚠️ Unable to fetch price.";
+    }
+  } catch (err) {
+    console.error(err);
+    stockResult.innerHTML = "❌ Error fetching stock data.";
+  }
+});
