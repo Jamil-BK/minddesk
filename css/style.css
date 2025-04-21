@@ -10,14 +10,24 @@
     padding: 0;
   }
   
-  /* Typewriter Heading */
+  /* ========== NAVBAR ========== */
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  
+  /* ========== HERO SECTION (Home Page) ========== */
+  section.container {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  
   #typewriter-text {
     font-size: 2.8rem;
     color: #4b0082;
     margin-bottom: 10px;
   }
   
-  /* Live Date/Time */
   #date {
     font-size: 1.2rem;
     color: #6c757d;
@@ -35,15 +45,63 @@
     color: #555;
   }
   
-  /* Hero Container */
-  section.container {
-    padding-top: 80px;
-    padding-bottom: 60px;
+  /* ========== QUICK ACCESS BUTTONS ========== */
+  a.btn {
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    padding: 15px 20px;
   }
   
-  /* Navbar Brand */
-  .navbar-brand {
-    font-weight: bold;
-    font-size: 1.4rem;
+  a.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* ========== DAILY QUOTE ========== */
+  #daily-quote {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  /* =============================
+     📋 TOOLS PAGE STYLES
+     ============================= */
+  
+  /* Section Titles */
+  .tab-pane h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Placeholder Text */
+  #weather-content,
+  #currency-content,
+  #stocks-content {
+    font-size: 1.1rem;
+    padding: 15px;
+    background-color: #ffffffcc;
+    border-radius: 12px;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 600px;
+    color: #444;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .tab-pane {
+    display: none;
+  }
+  .tab-pane.active.show {
+    display: block;
+  }
+  
+  /* Responsive Padding for Tool Tabs */
+  @media (max-width: 768px) {
+    .tab-pane {
+      padding: 0 10px;
+    }
   }
   

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindDesk | Your Personal Dashboard</title>
+  <title>MindDesk | Home</title>
 
-  <!-- Bootstrap 5 CDN -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <!-- Custom CSS -->
@@ -17,14 +17,15 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2e3c61;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">🧠 MindDesk</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto gap-2 px-2">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="tools.html">Tools</a></li>
           <li class="nav-item"><a class="nav-link" href="fun.html">Fun</a></li>
           <li class="nav-item"><a class="nav-link" href="journal.html">Journal</a></li>
@@ -34,15 +35,42 @@
       </div>
     </div>
   </nav>
-  
-  <!-- Hero Section -->
+
+  <!-- Main Section -->
   <section class="container text-center mt-5">
+    <!-- Typewriter Header -->
     <h1 id="typewriter-text" class="display-4 fw-bold"></h1>
     <p class="lead mt-3">Welcome to your personal dashboard. Stay informed, stay inspired.</p>
-    
+
+    <!-- Live Clock + Timezone -->
     <h5 id="date" class="mt-4 text-secondary"></h5>
     <h2 id="clock" class="text-primary"></h2>
     <h6 id="timezone" class="text-muted"></h6>
+
+    <!-- Quick Access Grid -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+      <div class="col">
+        <a href="tools.html" class="btn btn-outline-primary w-100 py-3">🔧 Tools</a>
+      </div>
+      <div class="col">
+        <a href="fun.html" class="btn btn-outline-success w-100 py-3">🎮 Fun</a>
+      </div>
+      <div class="col">
+        <a href="journal.html" class="btn btn-outline-secondary w-100 py-3">📝 Journal</a>
+      </div>
+      <div class="col">
+        <a href="voice.html" class="btn btn-outline-warning w-100 py-3">🎙️ Voice</a>
+      </div>
+      <div class="col">
+        <a href="settings.html" class="btn btn-outline-dark w-100 py-3">⚙️ Settings</a>
+      </div>
+    </div>
+
+    <!-- Daily Quote -->
+    <div class="mt-5">
+      <h5 class="text-muted">🌟 Daily Quote:</h5>
+      <blockquote id="daily-quote" class="blockquote fst-italic text-center">Loading...</blockquote>
+    </div>
   </section>
 
   <!-- Scripts -->
